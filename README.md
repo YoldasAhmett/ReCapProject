@@ -4,5 +4,5 @@ Elimden geldiğince düzgün bir şekilde katmanları oluşturdum. (Business, Da
 İnterfaceleri uygun bir şekilde kullanmaya çalıştım.
 Güncelleme: EntityFramework, DataBase ve IEntityRepository Classı Eklendi. IEntityRepository Classı ile kendimizi tekrar etmeme prensibini(DRY) devam ettiriyoruz.
 Güncelleme: Core katmanı, Dto(Data transfer object (Veri transfer nesnesi)) eklendi. Core katmanı sayesinde Car, Brand ve Color nesneleri için ayrı ayrı fonksiyonlar yazacağımıza bir base (ana) sınıf oluşturup bu sınıfı nesnelerimize inheritance (kalıtım) yaptık. Böylece kendimizi tekrar etme durumundan kurtulduk.
-Güncelleme: Core katmanına Result yapılandırılması eklendi. Buna Result yapılandırılmasına uygun olarak refactoring(iyileştirme) yapıldı.
+Güncelleme: Core katmanına Result yapılandırılması eklendi. Result yapılandırılmasına uygun olarak refactoring(iyileştirme) yapıldı.
 Kodlama.io' dan gelenler için -> NOT: Anlamadığınız yerler olursa kodlama.io' dan sorabilirsiniz.
