@@ -17,14 +17,14 @@ namespace DataAccess.Concrete
         {
             _cars = new List<Car>
             {
-                new Car{Id = 1, BrandId = 1, ColorId = 1, ModelYear = "2010"
-                ,DailyPrice = 200000, Description = "Dark Black BMW",  },
-                new Car{Id = 2, BrandId = 2, ColorId = 3, ModelYear = "2012"
-                ,DailyPrice = 500000, Description = "White Mercedes",  },
-                new Car{Id = 3, BrandId = 1, ColorId = 4, ModelYear = "2014"
-                ,DailyPrice = 350000, Description = "Ocean Blue BMW",  },
-                new Car{Id = 4, BrandId = 3, ColorId = 5, ModelYear = "2014"
-                ,DailyPrice = 1000000, Description = "Silver Maserati",  }
+                new Car{Id = 1, BrandDetailId = 1, ColorDetailId = 1, ModelYear = "2010"
+                ,DailyPrice = 200000, DetailedDescription = "Dark Black BMW",  },
+                new Car{Id = 2, BrandDetailId = 2, ColorDetailId = 3, ModelYear = "2012"
+                ,DailyPrice = 500000, DetailedDescription = "White Mercedes",  },
+                new Car{Id = 3, BrandDetailId = 1, ColorDetailId = 4, ModelYear = "2014"
+                ,DailyPrice = 350000, DetailedDescription = "Ocean Blue BMW",  },
+                new Car{Id = 4, BrandDetailId = 3, ColorDetailId = 5, ModelYear = "2014"
+                ,DailyPrice = 1000000, DetailedDescription = "Silver Maserati",  }
             };
         }
 
@@ -42,10 +42,10 @@ namespace DataAccess.Concrete
         public void Update(Car car)
         {
             Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
-            carToUpdate.BrandId = car.BrandId;
-            carToUpdate.ColorId = car.ColorId;
+            carToUpdate.BrandDetailId = car.BrandDetailId;
+            carToUpdate.ColorDetailId = car.ColorDetailId;
             carToUpdate.DailyPrice = car.DailyPrice;
-            carToUpdate.Description = car.Description;
+            carToUpdate.DetailedDescription = car.DetailedDescription;
             carToUpdate.ModelYear = car.ModelYear;
         }
 
@@ -56,7 +56,7 @@ namespace DataAccess.Concrete
 
         public List<Car> GetById(int BrandId)
         {
-            return _cars.Where(c => c.BrandId == BrandId).ToList();
+            return _cars.Where(c => c.BrandDetailId == BrandId).ToList();
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)

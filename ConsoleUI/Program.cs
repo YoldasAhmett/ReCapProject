@@ -11,17 +11,46 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            CarTest();
+
+            CarManager carManager2 = new CarManager(new EfCarDal());
+
+            foreach (var car in carManager2.GetCarsByBrandId(1).Data)
+            {
+                Console.WriteLine("BrandId: {0} Description: {1}", car.BrandDetailId, car.DetailedDescription);
+            }
+
+            Console.WriteLine("\n------------------------Dto Kullandık.--------------------");
+
+            var result = carManager2.GetCarDetails();
+
+            if (result.Success)
+            {
+                foreach (var carDetail in result.Data)
+                {
+                    Console.WriteLine(carDetail.CarName + " / " + carDetail.BrandName +
+                        " / " + carDetail.ColorName + " / " + carDetail.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void CarTest()
+        {
             CarManager carManager1 = new CarManager(new EfCarDal());
-            List<Car> cars = carManager1.GetAll();
+            List<Car> cars = carManager1.GetAll().Data;
 
             Console.WriteLine("Tüm arabaları gösterdik: \n");
-            foreach (Car car in carManager1.GetAll())
+            foreach (Car car in carManager1.GetAll().Data)
             {
-                Console.WriteLine(car.Description + " " + car.DailyPrice + " " + car.ModelYear);
+                Console.WriteLine(car.DetailedDescription + " " + car.DailyPrice + " " + car.ModelYear);
             }
             Console.WriteLine("---------------------------");
 
-            Console.WriteLine("Verilen bilgilerle yeni arabamızı ekledik.\n");
+            //Console.WriteLine("Verilen bilgilerle yeni arabamızı ekledik.\n");
             //carManager1.Add(new Car
             //{
             //    Id = 6,
@@ -36,11 +65,11 @@ namespace ConsoleUI
             //carManager1.Delete(new Car { Id = 6});
 
             //Id'si 3 olan arabayı güncelledik.
-            carManager1.Update(new Car { Id = 3, DailyPrice = 600000, Description = "Mercedes beyaz" });
+            //carManager1.Update(new Car { Id = 3, DailyPrice = 600000, Description = "Mercedes beyaz" });
 
-            foreach (Car car in carManager1.GetAll())
+            foreach (Car car in carManager1.GetAll().Data)
             {
-                Console.WriteLine(car.Description + " | " + car.DailyPrice + " | " + car.ModelYear);
+                Console.WriteLine(car.DetailedDescription + " | " + car.DailyPrice + " | " + car.ModelYear);
             }
             Console.WriteLine("---------------------------");
 
@@ -53,36 +82,24 @@ namespace ConsoleUI
             //}
             //Console.WriteLine("---------------------------");
 
-            Console.WriteLine("Güncellemek istediğimiz ürünün bilgilerini gönderdik." +
-                "Eğer Id doğruysa verilen bilgilerle ilgili güncelleme yapılacak. Aksi halde yapılamayacaktır.\n");
-            carManager1.Update(new Car
-            {
-                Id = 3,
-                BrandId = 4,
-                ColorId = 2,
-                DailyPrice = 1000000,
-                Description = "Tesla Model S",
-                ModelYear = "2012"
-            });
+            //Console.WriteLine("Güncellemek istediğimiz ürünün bilgilerini gönderdik." +
+            //    "Eğer Id doğruysa verilen bilgilerle ilgili güncelleme yapılacak. Aksi halde yapılamayacaktır.\n");
+            //carManager1.Update(new Car
+            //{
+            //    Id = 3,
+            //    BrandId = 4,
+            //    ColorId = 2,
+            //    DailyPrice = 1000000,
+            //    Description = "Tesla Model S",
+            //    ModelYear = "2012"
+            //});
 
-            foreach (Car car in carManager1.GetAll())
+            foreach (Car car in carManager1.GetAll().Data)
             {
-                Console.WriteLine(car.Description + "\n" + car.DailyPrice + "\n" + car.ModelYear);
+                Console.WriteLine(car.DetailedDescription + "\n" + car.DailyPrice + "\n" + car.ModelYear);
             }
 
-            CarManager carManager2 = new CarManager(new EfCarDal());
-
-            foreach (var car in carManager2.GetCarsByBrandId(1))
-            {
-                Console.WriteLine("BrandId: {0} Description: {1}", car.BrandId, car.Description);
-            }
-
-            Console.WriteLine("------------------------Dto Kullandık.--------------------");
-            foreach (var carDetail in carManager2.GetCarDetails())
-            {
-                Console.WriteLine(carDetail.CarName + " / " + carDetail.BrandName +
-                    " / " + carDetail.ColorName + " / " + carDetail.DailyPrice);
-            }
+            Console.WriteLine("-----------------------------------------------------------------------------");
         }
     }
 }
